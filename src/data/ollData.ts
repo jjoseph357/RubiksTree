@@ -59,7 +59,7 @@ export const ollDecisionTree: DecisionNode[] = [
           caseName: 'Line / Bar (Edge Orientation)',
           phase: 'oll',
           category: '2-Look OLL Step 1',
-          setupMoves: "F (R U R' U') F'",
+          setupMoves: "F (U R U' R') F'",
           recognitionTip: 'Two opposite edges are yellow. Hold the bar HORIZONTALLY (left to right).',
           howToHold: 'Hold the yellow bar HORIZONTALLY (Left to Right, 9 & 3 o\'clock). Either face where the bar runs across can face you.',
           sub30Tip: 'Hold the bar horizontally. One single sexy move inside F triggers: F (R U R\' U\') F\'. Takes 0.9 seconds!',
@@ -92,18 +92,18 @@ export const ollDecisionTree: DecisionNode[] = [
       {
         id: 'oll-opt-angle',
         label: 'Small "L" / 90° Angle Shape',
-        subtitle: 'Two adjacent edges form a backwards 9 o\'clock / 12 o\'clock angle',
+        subtitle: 'Two adjacent edges form a 90° angle at Front & Right (or Back & Left)',
         badge: 'L-Shape (1.0s)',
         diagramConfig: {
           type: 'oll',
           topGrid: [
-            false, true,  false,
-            true,  true,  false,
-            false, false, false
+            false, false, false,
+            false, true,  true,
+            false, true,  false
           ],
           wings: {
-            right: [false, true, false],
-            bottom: [false, true, false]
+            top: [false, true, false],
+            left: [false, true, false]
           }
         },
         solution: {
@@ -111,57 +111,58 @@ export const ollDecisionTree: DecisionNode[] = [
           caseName: 'Small "L" / Angle (Edge Orientation)',
           phase: 'oll',
           category: '2-Look OLL Step 1',
-          setupMoves: "f (R U R' U') f'",
-          recognitionTip: 'Two adjacent edges are yellow (ignore any yellow corners). Hold the two yellow edges at BACK and LEFT (12 o\'clock and 9 o\'clock).',
-          howToHold: 'Rotate U layer until the 2 yellow edges point BACK (12 o\'clock) and LEFT (9 o\'clock). IGNORE any yellow corners! The face with no yellow edge pointing at you is FRONT.',
-          sub30Tip: 'Wide f move: f (R U R\' U\') f\'. Turning both front layers (f) solves the L-shape in just 6 moves!',
+          setupMoves: "f (U R U' R') f'",
+          recognitionTip: 'Two adjacent edges are yellow (ignore any yellow corners). To use the fast wide-f alg, hold edges at FRONT (6 o\'clock) and RIGHT (3 o\'clock). Or hold at BACK & LEFT (12 & 9 o\'clock) to use regular F!',
+          howToHold: 'Speedcubing Hold (Wide f): Rotate top layer until the 2 yellow edges point to FRONT (6 o\'clock) and RIGHT (3 o\'clock). Alg: f (R U R\' U\') f\'.\n\nBeginner Hold (Regular F, No Wide Turns): Rotate top layer until the 2 yellow edges point to BACK (12 o\'clock) and LEFT (9 o\'clock). Alg: F (U R U\' R\') F\'.',
+          sub30Tip: 'Wide f move: f (R U R\' U\') f\'. Hold edges at FRONT & RIGHT. Turning both front layers solves the L-shape in just 6 moves!',
           diagramConfig: {
             type: 'oll',
             topGrid: [
-              false, true,  false,
-              true,  true,  false,
-              false, false, false
+              false, false, false,
+              false, true,  true,
+              false, true,  false
             ],
             wings: {
-              right: [false, true, false],
-              bottom: [false, true, false]
+              top: [false, true, false],
+              left: [false, true, false]
             }
           },
           algorithms: {
             intuitive: {
               id: 'oll-angle-int',
-              name: 'Wide Front + Sexy Move',
-              notation: "f (R U R' U') f'",
+              name: 'Back-Left Hold (Regular F, No Wide Turns)',
+              notation: "F (U R U' R') F'",
               moveCount: 6,
               difficulty: 'intuitive',
-              timeEstimate: 1.2,
+              timeEstimate: 1.1,
               intuitiveSteps: [
                 '1. Look only at the edges: notice the "L" shape formed by the 2 yellow edges and center.',
                 '2. Turn the top layer (U) so the two yellow edges point to BACK (12 o\'clock) and LEFT (9 o\'clock).',
-                '3. Push BOTH front layers down: f (wide front turn).',
-                '4. Do the Sexy Move: (R U R\' U\').',
-                '5. Push BOTH front layers back up: f\'.',
-                '6. All 4 edges are now yellow, forming the Yellow Cross!'
+                '3. Turn the front face clockwise: F.',
+                '4. Do the Inverse Sexy Move: (U R U\' R\').',
+                '5. Push the front face back up: F\'.',
+                '6. All 4 edges are now yellow, forming the Yellow Cross! Zero wide turns needed.'
               ],
-              notes: 'Alternative without wide turns: hold L at front-right and do F (R U R\' U\') (R U R\' U\') F\'!'
+              notes: 'Classic rotationless beginner solution: regular F + Inverse Sexy + F\'!'
             },
             sub30: {
               id: 'oll-angle-sub30',
-              name: 'f (Sexy Move) f\'',
+              name: 'Front-Right Hold (Fast Wide f)',
               notation: "f (R U R' U') f'",
               moveCount: 6,
               difficulty: 'sub30',
               timeEstimate: 0.9,
-              fingertricks: 'Right index pushes both front layers down (f), sexy move (R U R\' U\'), right thumb restores f\'.'
+              fingertricks: 'Hold edges at FRONT (6 o\'clock) and RIGHT (3 o\'clock). Right index pushes both front layers down (f), sexy move (R U R\' U\'), right thumb restores f\'.',
+              notes: 'Speedcubing favorite: exact same moves as the Line alg F (R U R\' U\') F\', but using wide f!'
             },
             pro: {
-              id: 'oll-angle-alt',
-              name: 'Inverse Sexy F-trigger',
-              notation: "F (U R U' R') F'",
-              moveCount: 6,
+              id: 'oll-angle-double-sexy',
+              name: 'Back-Left Double Sexy',
+              notation: "F (R U R' U') (R U R' U') F'",
+              moveCount: 8,
               difficulty: 'pro',
-              timeEstimate: 0.9,
-              notes: 'Alternative if you prefer regular F over wide f.'
+              timeEstimate: 1.0,
+              notes: 'Alternative from Back-Left: regular F followed by TWO Sexy Moves!'
             }
           }
         }
@@ -190,7 +191,7 @@ export const ollDecisionTree: DecisionNode[] = [
           caseName: 'Dot Case (No Yellow Edges)',
           phase: 'oll',
           category: '2-Look OLL Step 1',
-          setupMoves: "F (R U R' U') F' f (R U R' U') f'",
+          setupMoves: "f (U R U' R') f' F (U R U' R') F'",
           recognitionTip: 'Zero edges have yellow on top. Only the center is yellow.',
           howToHold: 'Any face can face you (White on bottom). Doing F (R U R\' U\') F\' produces an L-shape!',
           sub30Tip: 'Execute Line alg + Angle alg back-to-back: F (R U R\' U\') F\' then f (R U R\' U\') f\'. Takes ~1.8s.',
@@ -304,7 +305,7 @@ export const ollDecisionTree: DecisionNode[] = [
           caseName: 'Sune (OLL 27)',
           phase: 'oll',
           category: '2-Look OLL Step 2',
-          setupMoves: "R U R' U R U2' R'",
+          setupMoves: "R U2' R' U' R U' R'",
           recognitionTip: 'Put the solved fish-head at FRONT-LEFT. The front-right corner yellow sticker faces FRONT.',
           howToHold: 'Hold the solved fish-head corner at FRONT-LEFT (bottom-left). Look at front-right corner: its yellow sticker MUST face FRONT (directly at you).',
           sub30Tip: 'The most important algorithm in speedcubing! Practice until it is under 0.9s: R U R\' U R U2\' R\'.',
@@ -343,7 +344,7 @@ export const ollDecisionTree: DecisionNode[] = [
           caseName: 'Anti-Sune (OLL 26)',
           phase: 'oll',
           category: '2-Look OLL Step 2',
-          setupMoves: "R U2' R' U' R U' R'",
+          setupMoves: "R U R' U R U2' R'",
           recognitionTip: 'Fish head at BACK-RIGHT (or front-left with yellow facing right).',
           howToHold: 'Hold the solved fish-head corner at BACK-RIGHT (top-right). Look at front-left corner: its yellow sticker MUST face FRONT (directly at you).',
           sub30Tip: 'Inverse of Sune: R U2\' R\' U\' R U\' R\' or Left-hand Sune: L\' U\' L U\' L\' U2 L.',
@@ -405,7 +406,7 @@ export const ollDecisionTree: DecisionNode[] = [
           caseName: 'Car / H (OLL 21)',
           phase: 'oll',
           category: '2-Look OLL Step 2',
-          setupMoves: "F (R U R' U')3 F'",
+          setupMoves: "F (U R U' R') (U R U' R') (U R U' R') F'",
           recognitionTip: 'Two headlights facing front, two headlights facing back.',
           howToHold: 'Hold with 2 yellow headlights facing FRONT (facing you), and 2 facing BACK. Left and right sides have NO yellow.',
           sub30Tip: 'Super easy: F followed by 3 sexy moves, then F\'! F (R U R\' U\')3 F\'. Takes ~1.3s.',
@@ -425,7 +426,7 @@ export const ollDecisionTree: DecisionNode[] = [
             sub30: {
               id: 'oll-h-sub30',
               name: 'Triple Sexy Move',
-              notation: "F (R U R' U')3 F'",
+              notation: "F (R U R' U') (R U R' U') (R U R' U') F'",
               moveCount: 14,
               difficulty: 'sub30',
               timeEstimate: 1.3,
@@ -452,7 +453,7 @@ export const ollDecisionTree: DecisionNode[] = [
           caseName: 'Blinker / Pi (OLL 22)',
           phase: 'oll',
           category: '2-Look OLL Step 2',
-          setupMoves: "R U2' (R2' U' R2 U') (R2' U2' R)",
+          setupMoves: "R' U2 R2 U R2' U R2 U2 R'",
           recognitionTip: 'Hold the 2 headlights on the LEFT. The two right-side corners face front and back.',
           howToHold: 'Hold with the 2 yellow headlights on the LEFT side. The right-side corners face FRONT and BACK.',
           sub30Tip: 'Crisp R2-U pattern: R U2\' (R2\' U\' R2 U\') (R2\' U2\' R). Sub-1.2s with muscle memory.',
@@ -505,10 +506,10 @@ export const ollDecisionTree: DecisionNode[] = [
           caseName: 'Headlights / U (OLL 23)',
           phase: 'oll',
           category: '2-Look OLL Step 2',
-          setupMoves: "R2 D (R' U2 R) D' (R' U2 R')",
+          setupMoves: "(R U2 R) D (R' U2 R) D' R2",
           recognitionTip: 'Two yellow corners solved in back. The other two yellow stickers face forward like car headlights.',
-          howToHold: 'Hold with the 2 yellow headlights facing FRONT (directly at you). The 2 solved yellow corners must be in the BACK.',
-          sub30Tip: 'Hold headlights in front. Alg: R2 D (R\' U2 R) D\' (R\' U2 R\').',
+          howToHold: 'Hold with the 2 yellow headlights facing FRONT (directly at your chest). The 2 solved yellow corners must be in the BACK.',
+          sub30Tip: 'Hold headlights in front. Alg: R2 D (R\' U2 R) D\' (R\' U2 R\'). ⚠️ Direction alert: "D" slides bottom layer to the RIGHT; "D\'" slides it to the LEFT!',
           diagramConfig: {
             type: 'oll',
             topGrid: [
@@ -521,6 +522,21 @@ export const ollDecisionTree: DecisionNode[] = [
             }
           },
           algorithms: {
+            intuitive: {
+              id: 'oll-u-sune',
+              name: 'Double Sune (Zero D-Moves)',
+              notation: "R U R' U R U2' R2' U' R U' R' U2 R",
+              moveCount: 13,
+              difficulty: 'intuitive',
+              timeEstimate: 1.8,
+              intuitiveSteps: [
+                '1. Hold headlights facing FRONT.',
+                '2. Do standard Sune: (R U R\' U R U2\').',
+                '3. Follow with mirrored Sune: (R2\' U\' R U\' R\' U2 R).',
+                '4. Zero D-layer moves required — 100% safe for beginners!'
+              ],
+              notes: 'If you struggle with bottom-layer D turns, this pure R/U sequence solves the yellow face with familiar Sune triggers!'
+            },
             sub30: {
               id: 'oll-u-sub30',
               name: 'Standard Headlights Alg',
@@ -528,7 +544,7 @@ export const ollDecisionTree: DecisionNode[] = [
               moveCount: 9,
               difficulty: 'sub30',
               timeEstimate: 1.2,
-              fingertricks: 'Left ring finger pushes D, then D\' with left ring pull.'
+              fingertricks: 'Right wrist R2. Left ring pushes D to the RIGHT. Right hand executes (R\' U2 R). Right ring pushes D\' to the LEFT. Finish with (R\' U2 R\').'
             }
           }
         }
@@ -542,7 +558,7 @@ export const ollDecisionTree: DecisionNode[] = [
           caseName: 'Chameleon / T (OLL 24)',
           phase: 'oll',
           category: '2-Look OLL Step 2',
-          setupMoves: "(r U R' U') (r' F R F')",
+          setupMoves: "(F R' F' r) (U R U' r')",
           recognitionTip: 'Hold the 2 solved corners on the RIGHT. The two unsolved corners face front and back outwards.',
           howToHold: 'Hold with the 2 solved yellow corners on the RIGHT side. The two unsolved corners face front and back outwards.',
           sub30Tip: 'Fat sexy move into Sledgehammer! (r U R\' U\') (r\' F R F\'). Extremely smooth, under 1.1s!',
@@ -579,7 +595,7 @@ export const ollDecisionTree: DecisionNode[] = [
           caseName: 'Bowtie / L (OLL 25)',
           phase: 'oll',
           category: '2-Look OLL Step 2',
-          setupMoves: "F' (r U R' U') (r' F R)",
+          setupMoves: "(R' F' r) (U R U' r') F",
           recognitionTip: 'Two diagonal corners are yellow. Hold so one yellow faces front-left.',
           howToHold: 'Hold so the front-left unsolved corner yellow sticker faces FRONT (directly at you). Solved corners will be at back-left and front-right.',
           sub30Tip: 'Alg: F\' (r U R\' U\') (r\' F R). Essentially an F-trigger wrapped around wide sexy!',

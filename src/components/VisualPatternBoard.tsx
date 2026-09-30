@@ -90,6 +90,15 @@ export const VisualPatternBoard: React.FC<VisualPatternBoardProps> = ({ onOpenAc
 
   const currentSolutions = getSolutionsForPhase(activePhase);
 
+  // Dynamic counts for F2L categories
+  const f2lAllCount = currentSolutions.length;
+  const f2lWhiteUpCount = currentSolutions.filter(s => s.category === 'White Up').length;
+  const f2lWhiteSideCount = currentSolutions.filter(s => ['Colors Match', 'Colors Differ'].includes(s.category || '')).length;
+  const f2lConnectedCount = currentSolutions.filter(s => s.category === 'Connected Pair').length;
+  const f2lSlotCount = currentSolutions.filter(s => ['Corner in Slot', 'Edge in Slot', 'Both in Slot'].includes(s.category || '')).length;
+  const f2lSameCount = currentSolutions.filter(s => s.category === 'Colors Match').length;
+  const f2lDiffCount = currentSolutions.filter(s => s.category === 'Colors Differ').length;
+
   // Extract categories for filter chips
   const categories = Array.from(new Set(currentSolutions.map(s => s.category || 'General')));
 
@@ -216,16 +225,19 @@ export const VisualPatternBoard: React.FC<VisualPatternBoardProps> = ({ onOpenAc
           explanation = 'Two adjacent edges form a 90° angle.';
         }
 
-        if (hasBack && hasLeft) {
-          holdingGuide = 'PERFECT ANGLE! Yellow edges point to BACK (12 o\'clock) and LEFT (9 o\'clock). The face with no yellow edge pointing at you is FRONT!';
+        if (hasFront && hasRight) {
+          holdingGuide = 'PERFECT ANGLE FOR WIDE-f! Yellow edges point to FRONT (6 o\'clock) and RIGHT (3 o\'clock). Alg: f (R U R\' U\') f\'';
+          recommendedAlg = "f (R U R' U') f' (wide front turn)";
+        } else if (hasBack && hasLeft) {
+          holdingGuide = 'PERFECT ANGLE FOR REGULAR-F! Yellow edges point to BACK (12 o\'clock) and LEFT (9 o\'clock). Alg: F (U R U\' R\') F\' (or turn U2 for wide-f)';
+          recommendedAlg = "F (U R U' R') F' (or U2 + f (R U R' U') f')";
         } else if (hasBack && hasRight) {
-          holdingGuide = 'ROTATE TOP: Turn U\' (counter-clockwise) so the two yellow edges point to BACK and LEFT.';
-        } else if (hasFront && hasRight) {
-          holdingGuide = 'ROTATE TOP: Turn U2 (180°) so the two yellow edges point to BACK and LEFT.';
+          holdingGuide = 'ROTATE TOP: Turn U (clockwise) to put edges at Front & Right for wide-f, or U\' for Back & Left.';
+          recommendedAlg = "f (R U R' U') f' (after U turn)";
         } else if (hasFront && hasLeft) {
-          holdingGuide = 'ROTATE TOP: Turn U (clockwise) so the two yellow edges point to BACK and LEFT.';
+          holdingGuide = 'ROTATE TOP: Turn U\' (counter-clockwise) to put edges at Front & Right for wide-f, or U for Back & Left.';
+          recommendedAlg = "f (R U R' U') f' (after U' turn)";
         }
-        recommendedAlg = "f (R U R' U') f' (wide front turn)";
         targetSolutionId = 'oll-sol-angle';
       }
     } else if (yellowEdgeCount === 0) {
@@ -437,7 +449,7 @@ export const VisualPatternBoard: React.FC<VisualPatternBoardProps> = ({ onOpenAc
                 <span>🔄</span> 1-Click Standard Pair Presets:
               </span>
               <span className="text-[10px] text-slate-400 font-medium">
-                Standard Clockwise Order (from top, White on bottom): Green → Orange → Blue → Red → Green
+                Standard Clockwise Order (Yellow on top, White on bottom): Blue → Red → Green → Orange → Blue
               </span>
             </div>
 
@@ -476,7 +488,7 @@ export const VisualPatternBoard: React.FC<VisualPatternBoardProps> = ({ onOpenAc
                   <span>Or tap the exact 2 center colors on your cube right now:</span>
                 </span>
                 <span className="text-[10px] text-amber-300/90 font-medium">
-                  💡 With White on bottom: When Green faces you, Orange is on your Right! (Clockwise: Green → Orange → Blue → Red)
+                  💡 With Yellow on top & White on bottom: When Blue faces you, Red is on your Right! (Clockwise: Blue → Red → Green → Orange)
                 </span>
               </div>
 
@@ -566,7 +578,7 @@ export const VisualPatternBoard: React.FC<VisualPatternBoardProps> = ({ onOpenAc
               >
                 <span className="text-lg">🌟</span>
                 <span className="text-xs mt-1 font-bold">Show All</span>
-                <span className="text-[10px] opacity-75">13 Cases</span>
+                <span className="text-[10px] opacity-75">{f2lAllCount} Cases</span>
               </button>
 
               <button
@@ -579,7 +591,7 @@ export const VisualPatternBoard: React.FC<VisualPatternBoardProps> = ({ onOpenAc
               >
                 <span className="text-lg">⚪</span>
                 <span className="text-xs mt-1 font-bold">White on TOP</span>
-                <span className="text-[10px] opacity-75">Ceiling (2 Cases)</span>
+                <span className="text-[10px] opacity-75">Ceiling ({f2lWhiteUpCount} Cases)</span>
               </button>
 
               <button
@@ -592,7 +604,7 @@ export const VisualPatternBoard: React.FC<VisualPatternBoardProps> = ({ onOpenAc
               >
                 <span className="text-lg">🧭</span>
                 <span className="text-xs mt-1 font-bold">White on SIDE</span>
-                <span className="text-[10px] opacity-75">Facing / Perp (5 Cases)</span>
+                <span className="text-[10px] opacity-75">Facing / Perp ({f2lWhiteSideCount} Cases)</span>
               </button>
 
               <button
@@ -605,7 +617,7 @@ export const VisualPatternBoard: React.FC<VisualPatternBoardProps> = ({ onOpenAc
               >
                 <span className="text-lg">🔗</span>
                 <span className="text-xs mt-1 font-bold">Connected Pair</span>
-                <span className="text-[10px] opacity-75">Touching in Top (2 Cases)</span>
+                <span className="text-[10px] opacity-75">Touching in Top ({f2lConnectedCount} Cases)</span>
               </button>
 
               <button
@@ -618,14 +630,14 @@ export const VisualPatternBoard: React.FC<VisualPatternBoardProps> = ({ onOpenAc
               >
                 <span className="text-lg">📥</span>
                 <span className="text-xs mt-1 font-bold">Stuck in Slot</span>
-                <span className="text-[10px] opacity-75">Equator / Bottom (4 Cases)</span>
+                <span className="text-[10px] opacity-75">Equator / Bottom ({f2lSlotCount} Cases)</span>
               </button>
             </div>
           </div>
 
           {/* Sub-Filter if White is on Side */}
           {f2lVisualFilter === 'white-side' && (
-            <div className="bg-slate-950 p-3.5 rounded-2xl border border-slate-800 space-y-2 animate-in fade-in duration-150 shadow-inner">
+            <div className="bg-slate-950 p-4 rounded-2xl border border-slate-800 space-y-3 animate-in fade-in duration-150 shadow-inner">
               <span className="text-[10px] font-black uppercase tracking-wider text-slate-400 block">
                 Question 2: Look down at the TOP stickers of the Corner and Edge:
               </span>
@@ -638,7 +650,7 @@ export const VisualPatternBoard: React.FC<VisualPatternBoardProps> = ({ onOpenAc
                       : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
                   }`}
                 >
-                  All Side White (5)
+                  All Side White ({f2lWhiteSideCount})
                 </button>
                 <button
                   onClick={() => setF2lSubFilter('same')}
@@ -648,8 +660,8 @@ export const VisualPatternBoard: React.FC<VisualPatternBoardProps> = ({ onOpenAc
                       : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
                   }`}
                 >
-                  <span>🟢🟢 Same Top Color (3)</span>
-                  <span className="text-[10px] opacity-80">— Facing (F2L 5) vs Perp (F2L 6)</span>
+                  <span>🟢🟢 Same Top Color ({f2lSameCount})</span>
+                  <span className="text-[10px] opacity-80">— Both Orange OR Both Blue</span>
                 </button>
                 <button
                   onClick={() => setF2lSubFilter('diff')}
@@ -659,9 +671,40 @@ export const VisualPatternBoard: React.FC<VisualPatternBoardProps> = ({ onOpenAc
                       : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
                   }`}
                 >
-                  <span>🟢🔴 Different Top Colors (2)</span>
-                  <span className="text-[10px] opacity-80">— Classic 3-Move Insert</span>
+                  <span>🟢🔴 Different Top Colors ({f2lDiffCount})</span>
+                  <span className="text-[10px] opacity-80">— One Orange, One Blue</span>
                 </button>
+              </div>
+
+              {/* Educational Callout: 2 Top Colors on Corner & Recognition Rule */}
+              <div className="p-3.5 bg-blue-950/40 border border-blue-500/30 rounded-xl space-y-2 shadow-inner">
+                <div className="flex items-center gap-1.5 font-bold text-amber-300 text-xs">
+                  <span>💡</span> Why might your top sticker be a different color than the diagrams?
+                </div>
+                <p className="text-[11px] text-slate-300 leading-relaxed font-medium">
+                  When White is on the side, your corner piece has <strong className="text-white">two possible top colors</strong> depending on which side White points to:
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-[11px]">
+                  <div className="p-2 rounded-lg bg-slate-900/90 border border-slate-800">
+                    <span className="font-bold text-slate-200">1. White faces FRONT (at your chest):</span>
+                    <div className="text-slate-400 mt-0.5">
+                      Top of corner is <strong style={{ color: selectedSlot.frontHex }}>{selectedSlot.frontLabel}</strong> (Front center color).
+                    </div>
+                  </div>
+                  <div className="p-2 rounded-lg bg-slate-900/90 border border-slate-800">
+                    <span className="font-bold text-slate-200">2. White faces RIGHT (away to your right):</span>
+                    <div className="text-slate-400 mt-0.5">
+                      Top of corner is <strong style={{ color: selectedSlot.rightHex }}>{selectedSlot.rightLabel}</strong> (Right center color).
+                    </div>
+                  </div>
+                </div>
+                <div className="p-2 rounded-lg bg-amber-500/10 border border-amber-500/25 text-[11px] text-amber-200">
+                  <strong>The Golden F2L Recognition Rule:</strong> Don't look for an exact sticker color! Only look at the <strong>relationship between the two top stickers</strong>:
+                  <ul className="list-disc pl-4 mt-1 space-y-0.5 text-slate-300">
+                    <li>Both pieces have the <strong>SAME</strong> top color (both {selectedSlot.frontLabel} OR both {selectedSlot.rightLabel}) ➔ Look under <strong>"Same Top Color"</strong> (F2L 5–10)</li>
+                    <li>The two pieces have <strong>DIFFERENT</strong> top colors (one {selectedSlot.frontLabel}, one {selectedSlot.rightLabel}) ➔ Look under <strong>"Different Top Colors"</strong> (F2L 11–18)</li>
+                  </ul>
+                </div>
               </div>
             </div>
           )}

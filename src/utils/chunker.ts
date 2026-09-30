@@ -201,6 +201,18 @@ const TRIGGER_DICTIONARY: { pattern: RegExp; name: string; color: string; descri
     name: 'Left Wide-l Insert',
     color: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/40',
     description: 'Left wide l restore insert'
+  },
+  {
+    pattern: /^\(?F'\s+U2'?\s+F\)?$/i,
+    name: 'Front Double-Flick Pair',
+    color: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
+    description: 'Front-face double-flick pair'
+  },
+  {
+    pattern: /^\(?F\s+U2'?\s+F'\)?$/i,
+    name: 'Left Front Double-Flick Pair',
+    color: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40',
+    description: 'Left front double-flick pair'
   }
 ];
 
@@ -251,11 +263,20 @@ export function mirrorAlgToLeftSlot(notation: string): string {
 }
 
 
+// Helper to expand repeated parenthesized groups, e.g. (R U R' U')3 -> (R U R' U') (R U R' U') (R U R' U')
+export function expandRepeatedGroups(notation: string): string {
+  return notation.replace(/\(([^)]+)\)(\d+)/g, (_match, group, count) => {
+    const n = parseInt(count, 10);
+    return Array(n).fill(`(${group})`).join(' ');
+  });
+}
+
 // Decompose raw notation into semantic chunks
 export function chunkAlgorithm(notation: string): AlgChunk[] {
+  const expanded = expandRepeatedGroups(notation);
   // If already bracketed with parentheses, respect them!
-  const parenthesized = notation.match(/\([^)]+\)|[A-Za-z0-9'/]+/g);
-  if (!parenthesized) return [{ name: 'Full Move', notation, color: 'bg-slate-800 text-slate-300 border-slate-700', description: 'Continuous sequence' }];
+  const parenthesized = expanded.match(/\([^)]+\)|[A-Za-z0-9'/]+/g);
+  if (!parenthesized) return [{ name: 'Full Move', notation: expanded, color: 'bg-slate-800 text-slate-300 border-slate-700', description: 'Continuous sequence' }];
 
   const chunks: AlgChunk[] = [];
 
@@ -288,8 +309,9 @@ export function chunkAlgorithm(notation: string): AlgChunk[] {
 
 // Decompose raw notation into individual moves with fingertrick advice
 export function parseIndividualMoves(notation: string): MoveStep[] {
+  const expanded = expandRepeatedGroups(notation);
   // Strip parentheses
-  const clean = notation.replace(/[()]/g, ' ');
+  const clean = expanded.replace(/[()]/g, ' ');
   // Split on whitespace
   const rawMoves = clean.trim().split(/\s+/).filter(Boolean);
 
@@ -325,6 +347,11 @@ function getMoveFingertrick(m: string): MoveStep {
     case 'F2':
       return { move: 'F2', finger: 'Right Hand', action: 'Double turn front face 180°', icon: '🔄' };
 
+    case 'f':
+      return { move: 'f', finger: 'Right Index', action: 'Wide turn: rotate both F and S layers clockwise', icon: '👇' };
+    case "f'":
+      return { move: "f'", finger: 'Right Thumb', action: 'Wide turn: rotate both F and S layers counter-clockwise', icon: '👍' };
+
     case 'L':
       return { move: 'L', finger: 'Left Hand', action: 'Rotate left wrist DOWN (clockwise)', icon: '✋' };
     case "L'":
@@ -333,9 +360,9 @@ function getMoveFingertrick(m: string): MoveStep {
       return { move: 'L2', finger: 'Left Hand', action: 'Double swing 180° with left wrist', icon: '🔄' };
 
     case 'D':
-      return { move: 'D', finger: 'Left Ring', action: 'Flick bottom layer with left ring finger', icon: '🤙' };
+      return { move: 'D', finger: 'Left Ring', action: 'Turn bottom layer clockwise: push bottom layer to the RIGHT (looking from front)', icon: '👉' };
     case "D'":
-      return { move: "D'", finger: 'Right Ring', action: 'Push bottom layer with right ring finger', icon: '🤙' };
+      return { move: "D'", finger: 'Right Ring', action: 'Turn bottom layer counter-clockwise: push bottom layer to the LEFT (looking from front)', icon: '👈' };
     case 'D2':
     case "D2'":
       return { move: norm, finger: 'Ring + Pinky', action: 'Double flick bottom layer with left ring + pinky', icon: '✌️' };
@@ -354,9 +381,9 @@ function getMoveFingertrick(m: string): MoveStep {
       return { move: "r'", finger: 'Right Hand', action: 'Wide turn: rotate both R and M layers DOWN together', icon: '✋' };
 
     case 'd':
-      return { move: 'd', finger: 'Left Ring', action: 'Wide D: turn bottom two layers clockwise (or rotate y\')', icon: '🔄' };
+      return { move: 'd', finger: 'Left Ring', action: 'Wide D: turn bottom two layers clockwise', icon: '🔄' };
     case "d'":
-      return { move: "d'", finger: 'Right Ring', action: 'Wide D\': turn bottom two layers counter-clockwise', icon: '🔄' };
+      return { move: "d'", finger: 'Right Ring', action: "Wide D': turn bottom two layers counter-clockwise", icon: '🔄' };
 
     case 'y':
       return { move: 'y', finger: 'Both Hands', action: 'Cube rotation: rotate entire cube 90° clockwise looking from top', icon: '🔄' };

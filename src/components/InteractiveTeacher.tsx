@@ -175,97 +175,129 @@ const LESSONS: Lesson[] = [
   {
     id: 'lesson-3-f2l',
     lessonNumber: 3,
-    title: 'Phase 2: First Two Layers (The "Hide & Seek" Method)',
-    concept: 'Instead of solving corners then edges separately, we bond a corner and edge together on top and slide them into their "garage slot" at the same time!',
+    title: 'Phase 2: First Two Layers (The 2-Piece Hunt & Garage Method)',
+    concept: 'Instead of solving 4 corners then 4 edges separately (8 slow steps), we pair each corner with its matching edge in the top layer and slide them into their "garage slot" together in just 4 pairs!',
     steps: [
       {
-        title: 'The Concept: The "Garage" (Slot)',
-        subtitle: 'Understanding what we are trying to do.',
+        title: 'Step 1: The Objective & The 4 "Garages" (Slots)',
+        subtitle: 'What is F2L trying to do on the cube?',
         explanation: [
-          'Look at the bottom two layers. There are 4 vertical "corners" (like garages).',
-          'For example: between the Red center and Green center, there is a slot for the White-Red-Green corner and the Red-Green edge.',
-          'Instead of memorizing 41 formulas, F2L is just a simple story:',
-          '1. Bring both pieces to the top layer.',
-          '2. Pair them up so they touch and match.',
-          '3. Slide them down into the garage together!'
+          'Before F2L: You have solved the White Cross on the bottom.',
+          'The Goal: Fill the 4 vertical corners (called "slots" or "garages") between the side centers and the white cross.',
+          'When F2L is finished: The entire bottom TWO layers will be 100% solid color! Only the yellow top layer will remain.',
+          'Each slot needs exactly TWO pieces to be solved:',
+          '1. A Corner piece with WHITE and two side colors (e.g., White-Orange-Blue).',
+          '2. The matching Edge piece with those same two side colors (e.g., Orange-Blue).'
         ],
-        actionInstructions: 'Look at the top layer for any corner with WHITE on it. For example, find the White-Red-Green corner.',
+        actionInstructions: 'Look at the 4 vertical gaps between your side centers. Those are the 4 slots you will fill.',
         visualCue: {
-          title: 'Target: White-Red-Green Corner + Red-Green Edge',
-          cubeColor: 'bg-indigo-500/20 text-indigo-300',
-          badge: 'F2L Foundation'
-        },
-        checkpoint: 'Can you spot the matching corner and edge for one slot?'
-      },
-      {
-        title: 'The "Hide & Seek" Pairing Technique',
-        subtitle: 'How to connect pieces without breaking your white cross.',
-        explanation: [
-          'If both pieces are in the top layer, but separated:',
-          'How do you move one piece closer to the other without messing up your solved cross?',
-          'The Secret: "HIDE & SEEK"',
-          '1. Put the corner above its open garage slot.',
-          '2. HIDE: Turn the right face down (R\') to temporarily hide the corner in the basement.',
-          '3. MOVE: Turn the top layer (U2) to slide the edge next to the corner.',
-          '4. UNHIDE: Turn the right face back up (R) to bring the corner back.',
-          'Boom! They are now bonded into a connected pair!'
-        ],
-        actionInstructions: 'Hide the corner down into an open slot (R\'), rotate the edge to meet it (U2), then restore (R).',
-        visualCue: {
-          title: 'Hide Corner (R\') → Move Edge (U2) → Unhide (R)',
+          title: 'Goal: Solve All 4 Vertical Slots (Bottom 2 Layers Solid)',
           cubeColor: 'bg-emerald-500/20 text-emerald-300',
-          badge: 'The Secret',
-          moves: "(R' U2 R)"
+          badge: 'The Objective'
         },
-        checkpoint: 'Notice how the corner and edge are now touching with matching colors!'
+        checkpoint: 'Notice how solving 4 pairs solves both the bottom corners and the middle layer simultaneously!'
       },
       {
-        title: 'The 3-Move Garage Insert',
-        subtitle: 'Putting the connected pair into the bottom slot.',
+        title: 'Step 2: The Eye-Tracking Scan (What to Look at First)',
+        subtitle: 'Never stare at the whole cube! Follow this exact 3-step hunt.',
         explanation: [
-          'Once your pair is connected together in the top layer, putting it in the slot takes only 3 moves:',
-          '1. OPEN THE GARAGE: Turn the right face up (R).',
-          '2. DRIVE THE CAR IN: Turn the top layer to push the pair in (U\').',
-          '3. CLOSE THE GARAGE: Turn the right face down (R\').',
-          'That corner and edge are now permanently solved in the first two layers!'
+          'When looking at your scrambled cube during F2L, don\'t panic. Follow this simple scanning routine:',
+          '1. LOOK AT THE TOP LAYER: Find ANY corner piece that has a WHITE sticker.',
+          '2. NOTE ITS TWO SIDE COLORS: For example, Orange and Blue.',
+          '   (This instantly tells you your target: you are solving the Orange-Blue slot!)',
+          '3. HUNT FOR ITS TWIN EDGE: Scan the cube for the Orange-Blue edge (it has only 2 colors: Orange and Blue — NO White, NO Yellow).',
+          '4. IGNORE EVERYTHING ELSE: Your entire universe is now just those TWO pieces and that ONE slot!'
         ],
-        actionInstructions: 'Hold the slot in front-right and do: U (R U\' R\'). The pair slides right in.',
+        actionInstructions: 'Find one White corner in the top layer. Find its matching 2-color edge. Focus only on them.',
         visualCue: {
-          title: 'Open (R) → Drive In (U\') → Close (R\')',
+          title: 'Find 1 White Corner → Find Matching Edge → Ignore Rest',
+          cubeColor: 'bg-indigo-500/20 text-indigo-300',
+          badge: 'The Visual Scan'
+        },
+        checkpoint: 'Can you hold your cube and point with your fingers to the corner, the edge, and the slot where they belong?'
+      },
+      {
+        title: 'Step 3: The Universal "Eviction" Move (R U R\')',
+        subtitle: 'What if a corner or edge is trapped in a slot down below?',
+        explanation: [
+          'Often, the piece you need is not in the top layer — it is stuck down in a middle or bottom slot.',
+          'Don\'t worry! You don\'t need any complicated algorithms to free it:',
+          '1. Rotate the cube so the stuck piece is at your FRONT-RIGHT.',
+          '2. Execute the 3-move Eviction: (R U R\').',
+          '3. That piece instantly pops up into the top layer safely!',
+          '4. Your white cross remains 100% intact.'
+        ],
+        actionInstructions: 'Put any stuck piece at Front-Right and do: R U R\'. It pops straight to the top layer.',
+        visualCue: {
+          title: 'Stuck in Slot? Do (R U R\') to Eject to Top Layer',
+          cubeColor: 'bg-rose-500/20 text-rose-300',
+          badge: 'Universal Eviction',
+          moves: "(R U R')"
+        },
+        checkpoint: 'Both your corner and edge are now safely in the top layer, ready to be paired!'
+      },
+      {
+        title: 'Step 4: The 3 Base Situations (All 41 Cases Reduce to These!)',
+        subtitle: 'You do NOT need to memorize 41 algorithms. Master these 3 rules:',
+        explanation: [
+          'Once both pieces are in the top layer, look at their top stickers:',
+          '• SITUATION 1: Already Connected Pair (Stickers match)',
+          '  Align pair opposite slot, open garage, drive in, close: U (R U\' R\').',
+          '• SITUATION 2: Top Colors are DIFFERENT (e.g. Orange vs Blue)',
+          '  Place edge at 90° to corner. One move pairs them up: (R U R\')!',
+          '• SITUATION 3: Top Colors are the SAME (Both have Orange on top)',
+          '  The "Hide & Seek" move: Hide corner in basement (R\'), slide edge over (U2), bring corner back (R). They bond together! Then insert.'
+        ],
+        actionInstructions: 'Look at the top of your corner and edge. Are they already paired, different top colors, or same top color?',
+        visualCue: {
+          title: 'Connected → (R U\' R\') • Different → (R U R\') • Same → (R\' U2 R)',
           cubeColor: 'bg-amber-500/20 text-amber-300',
-          badge: '3-Move Insert',
-          moves: "U (R U' R')"
+          badge: 'The 3 Golden Rules'
         },
-        checkpoint: 'Look at the front-right slot: both layers are completely solid and matching!'
+        checkpoint: 'Can you see how every F2L case is just getting pieces into one of these 3 states?'
       },
       {
-        title: 'Special Case: Corner White Sticker Facing UP',
-        subtitle: 'Solving the White-Up puzzle for ANY of the 4 color pairs',
+        title: 'Step 5: Special Case — Corner White Facing UP',
+        subtitle: 'What to do when White is pointing straight at the ceiling.',
         explanation: [
-          'What if your corner has WHITE facing straight up at the ceiling?',
-          'The 4 Possible Slots (Always keep White on BOTTOM):',
-          '• Blue & Orange pair: Hold BLUE in FRONT, ORANGE on RIGHT.',
-          '• Green & Red pair: Hold GREEN in FRONT, RED on RIGHT.',
-          '• Red & Blue pair: Hold RED in FRONT, BLUE on RIGHT.',
-          '• Orange & Green pair: Hold ORANGE in FRONT, GREEN on RIGHT.',
-          'THE CRITICAL "STEP 0" (Pre-Alignment):',
-          'Before executing ANY formula, turn ONLY the top layer (U, U\', or U2) until:',
-          '1. The White-up corner is at FRONT-RIGHT (directly above the open slot).',
-          '2. The matching edge is at the RIGHT face (with its side sticker matching the right center).',
-          'Then execute the 3-step sequence:',
-          '1. TWIST CORNER: Turn (R U2\' R\'). Swinging the corner 180° flips White from the ceiling onto the front face!',
-          '2. CONNECT: Turn U\' to slide the corner over to the edge, forming a bonded pair on the right side.',
-          '3. INSERT: Turn (R U R\') to open the slot, slide the pair in, and close it!'
+          'If the corner has White on top, it cannot directly bond to the edge yet because White must face the side.',
+          'Here is the foolproof 3-step solution:',
+          '1. MATCH EDGE TO CENTER: Turn the top layer until the edge\'s side sticker matches its center color.',
+          '2. TWIST CORNER: Turn (R U2\' R\') — this swings the corner 180° and flips White from the ceiling onto the front face!',
+          '3. CONNECT & INSERT: Turn U\' to slide the corner over to the edge, then insert with (R U R\')!'
         ],
-        actionInstructions: 'Hold your slot at Front-Right. Turn top layer (U) so corner is at Front-Right and edge is at Right. Execute: (R U2\' R\') U\' (R U R\').',
+        actionInstructions: 'Match edge side to center. Do (R U2\' R\') to flip White to side, U\' to pair, (R U R\') to insert.',
         visualCue: {
-          title: 'Setup at Front-Right → (R U2\' R\') → U\' (R U R\')',
+          title: 'Match Edge → Twist Corner (R U2\' R\') → Connect U\' → Insert (R U R\')',
           cubeColor: 'bg-sky-500/20 text-sky-300',
-          badge: 'White-Up Mastered',
+          badge: 'White-Up Solved',
           moves: "(R U2' R') U' (R U R')"
         },
-        checkpoint: 'Check your cube: The target slot is now 100% solved! The white cross and first two layers are solid!',
-        tip: 'Remember the 4-pair rule: Orange is right of Blue, Red is right of Green, Blue is right of Red, Green is right of Orange. Keep your slot at Front-Right!'
+        checkpoint: 'Notice how White flipped from the top to the side and the slot solved perfectly!'
+      },
+      {
+        title: 'Step 6: Physical Cube Holding (Clockwise Color Guide)',
+        subtitle: 'Never hold your cube backwards again!',
+        explanation: [
+          'Always keep WHITE on the BOTTOM and YELLOW on the TOP.',
+          'Looking down at the Yellow face from above, the 4 side faces go clockwise:',
+          'Blue ➔ Red ➔ Green ➔ Orange ➔ Blue',
+          '',
+          'To solve each slot at your FRONT-RIGHT (FR):',
+          '• Orange-Blue Slot: Hold ORANGE in Front, BLUE on Right.',
+          '• Blue-Red Slot: Hold BLUE in Front, RED on Right.',
+          '• Red-Green Slot: Hold RED in Front, GREEN on Right.',
+          '• Green-Orange Slot: Hold GREEN in Front, ORANGE on Right.',
+          '',
+          'Repeat Steps 2 through 4 for all 4 slots. When done, your first two layers are 100% complete!'
+        ],
+        actionInstructions: 'Rotate your cube to put your target slot at Front-Right and match the centers table above.',
+        visualCue: {
+          title: 'Blue ➔ Red ➔ Green ➔ Orange ➔ Blue (Clockwise)',
+          cubeColor: 'bg-emerald-500/20 text-emerald-300',
+          badge: 'Holding Anchor'
+        },
+        checkpoint: 'When all 4 slots are solved, you are ready for Phase 3: The Yellow Face (OLL)!'
       }
     ]
   },
@@ -284,9 +316,9 @@ const LESSONS: Lesson[] = [
         subtitle: 'Look only at the 4 edges and center. Here is the algorithm for each case:',
         explanation: [
           'Ignore the 4 corners for now. The yellow edges will always form one of these 3 cases:',
-          '1. The "L" / 90° Angle (2 adjacent edges): Hold the edges at BACK & LEFT (12 & 9 o\'clock). Alg: f (R U R\' U\') f\'',
+          '1. The "L" / 90° Angle (2 adjacent edges): Hold edges at FRONT & RIGHT (6 & 3 o\'clock) and do f (R U R\' U\') f\'. (Or hold at BACK & LEFT and do F (U R U\' R\') F\')',
           '2. The Line (2 opposite edges): Hold horizontally (left-to-right). Alg: F (R U R\' U\') F\'',
-          '3. The Dot (0 edges yellow): Do the Line alg: F (R U R\' U\') F\', then U2, then the L alg: f (R U R\' U\') f\'',
+          '3. The Dot (0 edges yellow): Do F (R U R\' U\') F\' immediately followed by f (R U R\' U\') f\' with NO U-turn in between!',
           '4. Cross Already Formed (all 4 edges yellow): Skip directly to Step 2!'
         ],
         actionInstructions: 'Identify your edge case above, hold in the correct position, and execute its algorithm to form the Yellow Cross.',
@@ -307,7 +339,7 @@ const LESSONS: Lesson[] = [
           '2. Anti-Sune (1 corner yellow, front-right sticker faces right): R U2 R\' U\' R U\' R\'',
           '3. Car (0 corners yellow, headlights in front & back): F (R U R\' U\')3 F\'',
           '4. Blinker (0 corners yellow, headlights on left): (R U2 R\') (U\' R U R\') (U\' R U\' R\')',
-          '5. Headlights (2 corners yellow in back, 2 headlights in front): R2 D (R\' U2 R) D\' (R\' U2 R\')',
+          '5. Headlights (2 corners yellow in back, 2 headlights in front): R2 D (R\' U2 R) D\' (R\' U2 R\') — 💡 Direction Tip: D slides bottom layer RIGHT; D\' slides it back LEFT! (Or use Sune: R U R\' U R U2\' R\' to cycle into the Fish)',
           '6. Chameleon (2 corners yellow, headlights facing side): r U R\' U\' r\' F R F\'',
           '7. Bowtie (2 diagonal corners yellow): F\' (r U R\' U\') (r\' F R)',
           'Note for Beginners: Executing the standard Sune (R U R\' U R U2\' R\') will solve or cycle ANY corner case into the Fish shape!'

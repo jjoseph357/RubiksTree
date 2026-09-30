@@ -451,7 +451,7 @@ export const f2lDecisionTree: DecisionNode[] = [
       {
         id: 'f2l-opt-case-4',
         label: 'Separated 3-Move Ready (White Front)',
-        subtitle: 'Separated pieces, top colors differ. Corner white faces FRONT, edge is at UB rea...',
+        subtitle: 'Separated pieces, top colors differ. Corner white faces FRONT, edge is at UL ready for front 3-move insert.',
         badge: 'F2L 4',
         solution: {
           id: 'f2l-sol-case-4',
@@ -459,8 +459,8 @@ export const f2lDecisionTree: DecisionNode[] = [
           phase: 'f2l',
           category: 'Connected Pair',
           setupMoves: "F' U F",
-          recognitionTip: 'Separated pieces, top colors differ. Corner white faces FRONT, edge is at UB ready for front 3-move insert.',
-          howToHold: 'Hold White on BOTTOM. Orange in Front, Blue on Right. Corner at UFR (white front), edge at UB.',
+          recognitionTip: 'Separated pieces, top colors differ. Corner white faces FRONT, edge is at UL ready for front 3-move insert.',
+          howToHold: 'Hold White on BOTTOM. Orange in Front, Blue on Right (target slot is Front-Right). Corner at UFR (white facing FRONT), edge at UL.',
           startingSetup: {
             cornerPosition: 'Front-Right (UFR) or target slot',
             edgePosition: 'Positioned according to case pattern',
@@ -475,9 +475,9 @@ export const f2lDecisionTree: DecisionNode[] = [
               cornerColorSecondary: 'orange',
               cornerColorTertiary: 'blue',
               edgePos: 'top',
-              edgeTopPos: 'back',
-              edgeColorTop: 'orange',
-              edgeColorFront: 'blue',
+              edgeTopPos: 'left',
+              edgeColorTop: 'blue',
+              edgeColorFront: 'orange',
               topColorsMatch: false
             }
           },
@@ -677,15 +677,15 @@ export const f2lDecisionTree: DecisionNode[] = [
           caseName: 'White Front: Diagonal Separated (F2L 7)',
           phase: 'f2l',
           category: 'Colors Match',
-          setupMoves: "R' U' R U2' R' U2 R d'",
+          setupMoves: "R U R' U2 R U2' R' U",
           recognitionTip: 'Top colors MATCH. Corner at UFR with White facing FRONT. Edge is at LEFT (UL) separated diagonally.',
-          howToHold: 'Hold White on BOTTOM. Orange in Front, Blue on Right. Corner at UFR, edge at UL.',
+          howToHold: 'Hold White on BOTTOM. Orange in Front, Blue on Right (target slot is Front-Right). Corner at UFR (white facing FRONT), edge at UL.',
           startingSetup: {
             cornerPosition: 'Front-Right (UFR) or target slot',
             edgePosition: 'Positioned according to case pattern',
             setupAction: 'Turn top layer (U, U\', or U2) until pieces match diagram'
           },
-          sub30Tip: "Right Slot (FR): d (R' U2 R) U2 (R' U R). Left Slot (FL) Mirror available via the toggle above.",
+          sub30Tip: "Right Slot (FR): U' (R U2' R') U2 (R U' R'). Left Slot (FL) Mirror available via the toggle above.",
           diagramConfig: {
             type: 'f2l',
             f2lDetails: {
@@ -704,30 +704,30 @@ export const f2lDecisionTree: DecisionNode[] = [
             intuitive: {
               id: 'f2l-case-7-int',
               name: 'Intuitive Solution',
-              notation: "d (R' U2 R) U2 (R' U R)",
+              notation: "U' (R U2' R') U2 (R U' R')",
               moveCount: 8,
               difficulty: 'intuitive',
               timeEstimate: 1.5,
               intuitiveSteps: [
-                '1. d: Rotates lower layers counter-clockwise (or rotate y\').',
-                '2. (R\' U2 R): Hides corner, swings edge around to pair up.',
-                '3. U2: Brings the pair across.',
-                '4. (R\' U R): 3-move insert into back slot.'
+                '1. U\': Shifts corner away from the front slot.',
+                '2. (R U2\' R\'): Hides corner and swings edge into alignment.',
+                '3. U2: Positions pair for standard insert.',
+                '4. (R U\' R\'): Standard 3-move insert into Front-Right slot.'
               ]
             },
             sub30: {
               id: 'f2l-case-7-sub30',
               name: 'Standard Speedcubing',
-              notation: "d (R' U2 R) U2 (R' U R)",
+              notation: "U' (R U2' R') U2 (R U' R')",
               moveCount: 8,
               difficulty: 'sub30',
               timeEstimate: 1.0,
-              fingertricks: 'Left ring turns d, right hand (R\' U2 R), double flick U2, insert (R\' U R).'
+              fingertricks: 'Left index U\', right wrist (R U2\' R\'), double flick U2, right hand (R U\' R\').'
             },
             pro: {
               id: 'f2l-case-7-pro',
               name: 'Pro Speed Execution',
-              notation: "d (R' U2 R) U2 (R' U R)",
+              notation: "U' (R U2' R') U2 (R U' R')",
               moveCount: 8,
               difficulty: 'pro',
               timeEstimate: 0.8,
@@ -1169,15 +1169,15 @@ export const f2lDecisionTree: DecisionNode[] = [
           caseName: 'White Front: Left Separated (F2L 14)',
           phase: 'f2l',
           category: 'Colors Differ',
-          setupMoves: "R' U' R U R' U2 R d'",
-          recognitionTip: 'Top colors DIFFER. Corner at UFR with White facing FRONT. Edge is at LEFT (UL).',
-          howToHold: 'Hold White on BOTTOM. Orange in Front, Blue on Right. Corner at UFR, edge at UL.',
+          setupMoves: "F' U F",
+          recognitionTip: 'Top colors DIFFER. Corner at UFR with White facing FRONT. Edge is at LEFT (UL). Ready for front 3-move insert.',
+          howToHold: 'Hold White on BOTTOM. Orange in Front, Blue on Right (target slot is Front-Right). Corner at UFR (white facing FRONT), edge at UL.',
           startingSetup: {
             cornerPosition: 'Front-Right (UFR) or target slot',
             edgePosition: 'Positioned according to case pattern',
             setupAction: 'Turn top layer (U, U\', or U2) until pieces match diagram'
           },
-          sub30Tip: "Right Slot (FR): d (R' U2 R) U' (R' U R). Left Slot (FL) Mirror available via the toggle above.",
+          sub30Tip: "Right Slot (FR): (F' U' F). Left Slot (FL) Mirror available via the toggle above.",
           diagramConfig: {
             type: 'f2l',
             f2lDetails: {
@@ -1196,31 +1196,30 @@ export const f2lDecisionTree: DecisionNode[] = [
             intuitive: {
               id: 'f2l-case-14-int',
               name: 'Intuitive Solution',
-              notation: "d (R' U2 R) U' (R' U R)",
-              moveCount: 8,
+              notation: "(F' U' F)",
+              moveCount: 3,
               difficulty: 'intuitive',
               timeEstimate: 1.5,
               intuitiveSteps: [
-                '1. d: Rotates lower layers counter-clockwise.',
-                '2. (R\' U2 R): Hides corner and sets up edge.',
-                '3. U\': Aligns pair.',
-                '4. (R\' U R): 3-move insert into slot.'
+                '1. F\': Opens the front face slot.',
+                '2. U\': Connects corner and edge together.',
+                '3. F: Restores the front face, completing the insert into the Front-Right slot.'
               ]
             },
             sub30: {
               id: 'f2l-case-14-sub30',
               name: 'Standard Speedcubing',
-              notation: "d (R' U2 R) U' (R' U R)",
-              moveCount: 8,
+              notation: "(F' U' F)",
+              moveCount: 3,
               difficulty: 'sub30',
               timeEstimate: 1.0,
-              fingertricks: 'Left ring d, right hand (R\' U2 R), left index U\', right hand (R\' U R).'
+              fingertricks: 'Right thumb lifts F\', left index flicks U\', right index pushes F.'
             },
             pro: {
               id: 'f2l-case-14-pro',
               name: 'Pro Speed Execution',
-              notation: "d (R' U2 R) U' (R' U R)",
-              moveCount: 8,
+              notation: "(F' U' F)",
+              moveCount: 3,
               difficulty: 'pro',
               timeEstimate: 0.8,
               notes: 'Optimal speedcubing execution. Use the Left Slot toggle for mirror execution.'
@@ -1731,15 +1730,15 @@ export const f2lDecisionTree: DecisionNode[] = [
           caseName: 'White UP: Edge at Left (F2L 22)',
           phase: 'f2l',
           category: 'White Up',
-          setupMoves: "R' U' R U2' R' U R d'",
+          setupMoves: "F' U' F U F' U2 F U",
           recognitionTip: 'White faces UP. Edge is at LEFT (UL).',
-          howToHold: 'Hold White on BOTTOM. Orange in Front, Blue on Right. Corner at UFR, edge at UL.',
+          howToHold: 'Hold White on BOTTOM. Orange in Front, Blue on Right (target slot is Front-Right). Corner at UFR (white facing UP), edge at UL.',
           startingSetup: {
             cornerPosition: 'Front-Right (UFR) or target slot',
             edgePosition: 'Positioned according to case pattern',
             setupAction: 'Turn top layer (U, U\', or U2) until pieces match diagram'
           },
-          sub30Tip: "Right Slot (FR): d (R' U' R) U2 (R' U R). Left Slot (FL) Mirror available via the toggle above.",
+          sub30Tip: "Right Slot (FR): U' (F' U2 F) U' (F' U F). Left Slot (FL) Mirror available via the toggle above.",
           diagramConfig: {
             type: 'f2l',
             f2lDetails: {
@@ -1758,30 +1757,30 @@ export const f2lDecisionTree: DecisionNode[] = [
             intuitive: {
               id: 'f2l-case-22-int',
               name: 'Intuitive Solution',
-              notation: "d (R' U' R) U2 (R' U R)",
+              notation: "U' (F' U2 F) U' (F' U F)",
               moveCount: 8,
               difficulty: 'intuitive',
               timeEstimate: 1.5,
               intuitiveSteps: [
-                '1. d: Rotates bottom two layers.',
-                '2. (R\' U\' R): Hides corner and pairs with edge.',
-                '3. U2: Positions pair.',
-                '4. (R\' U R): Inserts into slot.'
+                '1. U\': Shifts corner away from the target slot.',
+                '2. (F\' U2 F): Front double-flick pair: hides edge and joins it with the corner.',
+                '3. U\': Positions the formed pair above the front slot.',
+                '4. (F\' U F): Front insert: drops the pair cleanly into the Front-Right slot!'
               ]
             },
             sub30: {
               id: 'f2l-case-22-sub30',
               name: 'Standard Speedcubing',
-              notation: "d (R' U' R) U2 (R' U R)",
+              notation: "U' (F' U2 F) U' (F' U F)",
               moveCount: 8,
               difficulty: 'sub30',
               timeEstimate: 1.0,
-              fingertricks: 'Left ring d, right hand (R\' U\' R), double flick U2, right hand (R\' U R).'
+              fingertricks: 'Left index U\', thumb push (F\' U2 F), left index U\', thumb push (F\' U F).'
             },
             pro: {
               id: 'f2l-case-22-pro',
               name: 'Pro Speed Execution',
-              notation: "d (R' U' R) U2 (R' U R)",
+              notation: "U' (F' U2 F) U' (F' U F)",
               moveCount: 8,
               difficulty: 'pro',
               timeEstimate: 0.8,

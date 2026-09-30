@@ -181,41 +181,43 @@ export const InteractiveMovePlayer: React.FC<InteractiveMovePlayerProps> = ({
         )}
       </div>
 
-      {/* Target Slot & Hand Mode Selector (Right Slot FR vs Left Slot FL Mirrored) */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-slate-950/90 rounded-2xl border border-slate-800 text-xs">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-[11px] font-black uppercase tracking-wider text-slate-400">
-            Target Slot & Hand:
-          </span>
-          <div className="flex items-center gap-1.5">
-            <button
-              onClick={() => { setIsLeftSlot(false); setCurrentIdx(0); setIsPlaying(false); }}
-              className={`px-3 py-1.5 rounded-xl font-bold text-xs transition-all flex items-center gap-1.5 ${
-                !isLeftSlot
-                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30 ring-1 ring-blue-400'
-                  : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
-              }`}
-            >
-              <span>✋</span>
-              <span>Right Slot (FR)</span>
-            </button>
-            <button
-              onClick={() => { setIsLeftSlot(true); setCurrentIdx(0); setIsPlaying(false); }}
-              className={`px-3 py-1.5 rounded-xl font-bold text-xs transition-all flex items-center gap-1.5 ${
-                isLeftSlot
-                  ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30 ring-1 ring-purple-400'
-                  : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
-              }`}
-            >
-              <span>🤚</span>
-              <span>Left Slot (FL) Mirrored</span>
-            </button>
+      {/* Target Slot & Hand Mode Selector (Right Slot FR vs Left Slot FL Mirrored) - Only for F2L cases */}
+      {diagramConfig?.type === 'f2l' && (
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-slate-950/90 rounded-2xl border border-slate-800 text-xs">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-[11px] font-black uppercase tracking-wider text-slate-400">
+              Target Slot & Hand:
+            </span>
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => { setIsLeftSlot(false); setCurrentIdx(0); setIsPlaying(false); }}
+                className={`px-3 py-1.5 rounded-xl font-bold text-xs transition-all flex items-center gap-1.5 ${
+                  !isLeftSlot
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-600/30 ring-1 ring-blue-400'
+                    : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
+                }`}
+              >
+                <span>✋</span>
+                <span>Right Slot (FR)</span>
+              </button>
+              <button
+                onClick={() => { setIsLeftSlot(true); setCurrentIdx(0); setIsPlaying(false); }}
+                className={`px-3 py-1.5 rounded-xl font-bold text-xs transition-all flex items-center gap-1.5 ${
+                  isLeftSlot
+                    ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30 ring-1 ring-purple-400'
+                    : 'bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800'
+                }`}
+              >
+                <span>🤚</span>
+                <span>Left Slot (FL) Mirrored</span>
+              </button>
+            </div>
           </div>
+          <span className="text-[11px] font-medium text-slate-400">
+            {isLeftSlot ? '🔄 Mirrored (R ↔ L\', U ↔ U\') for Left-Slot insert' : 'Standard Front-Right execution'}
+          </span>
         </div>
-        <span className="text-[11px] font-medium text-slate-400">
-          {isLeftSlot ? '🔄 Mirrored (R ↔ L\', U ↔ U\') for Left-Slot insert' : 'Standard Front-Right execution'}
-        </span>
-      </div>
+      )}
 
       {/* Cognitive Chunking Badges: Shows the 2-3 named triggers */}
       <div className="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 space-y-2">

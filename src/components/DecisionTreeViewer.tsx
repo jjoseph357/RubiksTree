@@ -8,7 +8,7 @@ import { pllDecisionTree } from '../data/pllData';
 import { CubeDiagram } from './CubeDiagram';
 import { AlgorithmCard } from './AlgorithmCard';
 import { CubeLocatorModal } from './CubeLocatorModal';
-import { ArrowLeft, RotateCcw, ChevronRight, Sparkles, HelpCircle, Compass, CheckCircle2, GraduationCap } from 'lucide-react';
+import { ArrowLeft, RotateCcw, ChevronRight, ChevronDown, ChevronUp, Sparkles, HelpCircle, Compass, CheckCircle2, GraduationCap, Eye, Target, Zap } from 'lucide-react';
 
 interface DecisionTreeViewerProps {
   currentDifficulty: DifficultyLevel;
@@ -35,6 +35,7 @@ export const DecisionTreeViewer: React.FC<DecisionTreeViewerProps> = ({
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [activeSolution, setActiveSolution] = useState<DecisionSolution | null>(null);
   const [isLocatorOpen, setIsLocatorOpen] = useState<boolean>(false);
+  const [showF2LPrimer, setShowF2LPrimer] = useState<boolean>(true);
 
   const phaseToLessonIdx: Record<Phase, number> = {
     cross: 1, // Lesson 2: Cross
@@ -272,6 +273,93 @@ export const DecisionTreeViewer: React.FC<DecisionTreeViewerProps> = ({
               </button>
             </div>
           </div>
+
+          {/* F2L Absolute Beginner Primer (Visible only when in F2L phase) */}
+          {phase === 'f2l' && (
+            <div className="bg-gradient-to-r from-emerald-950/40 via-slate-900/80 to-amber-950/30 border border-emerald-500/30 rounded-2xl overflow-hidden shadow-lg">
+              <button
+                onClick={() => setShowF2LPrimer(prev => !prev)}
+                className="w-full p-4 flex items-center justify-between text-left hover:bg-slate-800/30 transition-colors"
+              >
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-xs text-emerald-400 font-bold shrink-0">
+                    🌱
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">
+                      <span>Totally New to F2L? Start Here (The 30-Second Guide)</span>
+                      <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                        Zero Jargon
+                      </span>
+                    </h3>
+                    <p className="text-xs text-slate-400">
+                      Understand your objective, what your eyes should look for, and the only 3 rules you need.
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-xs text-slate-400">
+                  <span>{showF2LPrimer ? 'Hide Guide' : 'Show Guide'}</span>
+                  {showF2LPrimer ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                </div>
+              </button>
+
+              {showF2LPrimer && (
+                <div className="p-4 sm:p-5 pt-0 space-y-4 border-t border-slate-800/80 mt-1">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 pt-2">
+                    {/* Card 1: The Objective */}
+                    <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                      <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-400">
+                        <Target className="w-3.5 h-3.5" />
+                        <span>1. Your Exact Objective</span>
+                      </div>
+                      <p className="text-xs text-slate-300 leading-relaxed">
+                        You already solved the White Cross. Your goal now is to fill the <strong>4 vertical corners</strong> ("garages / slots") between the centers so the <strong>bottom two layers</strong> become 100% solid color!
+                      </p>
+                    </div>
+
+                    {/* Card 2: What to Look At */}
+                    <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                      <div className="flex items-center gap-1.5 text-xs font-bold text-amber-400">
+                        <Eye className="w-3.5 h-3.5" />
+                        <span>2. What Your Eyes Look For</span>
+                      </div>
+                      <p className="text-xs text-slate-300 leading-relaxed">
+                        Don't look at the whole cube! Pick <strong>1 corner with WHITE</strong> on the top layer (e.g. White-Orange-Blue). Find its <strong>twin edge</strong> (Orange-Blue). Ignore everything else while solving them.
+                      </p>
+                    </div>
+
+                    {/* Card 3: What Move to Do */}
+                    <div className="bg-slate-950/80 border border-slate-800 rounded-xl p-3.5 space-y-1.5">
+                      <div className="flex items-center gap-1.5 text-xs font-bold text-sky-400">
+                        <Zap className="w-3.5 h-3.5" />
+                        <span>3. What Move to Perform</span>
+                      </div>
+                      <p className="text-xs text-slate-300 leading-relaxed">
+                        • Stuck in a slot? Eject with <code className="text-sky-300 font-bold bg-slate-900 px-1 py-0.5 rounded">R U R'</code>.<br />
+                        • Paired up? Insert with <code className="text-emerald-300 font-bold bg-slate-900 px-1 py-0.5 rounded">U (R U' R')</code>.<br />
+                        • Diff top colors? Pair with <code className="text-amber-300 font-bold bg-slate-900 px-1 py-0.5 rounded">R U R'</code>.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-1">
+                    <p className="text-[11px] text-slate-400">
+                      💡 <em>Remember: You don't need to memorize 41 algorithms. Select the case below that matches where your 2 pieces sit!</em>
+                    </p>
+                    {onOpenAcademy && (
+                      <button
+                        onClick={() => onOpenAcademy(phaseToLessonIdx.f2l)}
+                        className="px-3 py-1.5 text-xs font-bold rounded-lg bg-emerald-500/20 text-emerald-300 hover:bg-emerald-500/30 border border-emerald-500/40 flex items-center gap-1.5 shrink-0 transition-all"
+                      >
+                        <GraduationCap className="w-3.5 h-3.5 text-emerald-400" />
+                        <span>Open Interactive F2L Lesson (Lesson 3)</span>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
           <div className="space-y-2 border-b border-slate-800 pb-5">
             <div className="flex items-center justify-between text-xs text-amber-400 font-semibold tracking-wider uppercase">

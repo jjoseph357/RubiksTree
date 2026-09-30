@@ -280,7 +280,7 @@ export const pllDecisionTree: DecisionNode[] = [
           caseName: 'Ua-Perm (Clockwise Cycle)',
           phase: 'pll',
           category: '2-Look PLL Step 2',
-          setupMoves: "(R U' R U) R U (R U' R' U') R2",
+          setupMoves: "R2 U (R U R' U') R' U' (R' U R')",
           recognitionTip: 'Solved bar in BACK. Front edge sticker matches the LEFT face center.',
           sub30Tip: 'RU Ua-Perm: (R U\' R U) R U (R U\' R\' U\') R2 or M2 U M U2 M\' U M2. Sub-1.1s!',
           diagramConfig: {
@@ -318,7 +318,7 @@ export const pllDecisionTree: DecisionNode[] = [
           caseName: 'Ub-Perm (Counter-Clockwise Cycle)',
           phase: 'pll',
           category: '2-Look PLL Step 2',
-          setupMoves: "R2 U (R U R' U') R' U' (R' U R')",
+          setupMoves: "(R U' R U) R U (R U' R' U') R2",
           recognitionTip: 'Solved bar in BACK. Front edge sticker matches the RIGHT face center.',
           sub30Tip: 'Ub-Perm: R2 U (R U R\' U\') R\' U\' (R\' U R\'). Under 1.1s!',
           diagramConfig: {

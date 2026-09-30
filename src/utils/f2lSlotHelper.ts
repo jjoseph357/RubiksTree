@@ -41,19 +41,6 @@ export function createSlotPair(frontColorId: string, rightColorId: string): F2LS
 
 export const F2L_SLOT_PAIRS: F2LSlotPair[] = [
   {
-    id: 'green-orange',
-    name: 'Green & Orange',
-    frontColor: 'green',
-    rightColor: 'orange',
-    frontHex: '#16a34a',
-    rightHex: '#ea580c',
-    frontLabel: 'GREEN',
-    rightLabel: 'ORANGE',
-    slotLabel: 'Green-Orange Slot',
-    icon: '🟩 🟧',
-    description: 'GREEN is in Front (facing your chest), ORANGE is on Right. Target slot is at Front-Right.'
-  },
-  {
     id: 'orange-blue',
     name: 'Orange & Blue',
     frontColor: 'orange',
@@ -91,6 +78,19 @@ export const F2L_SLOT_PAIRS: F2LSlotPair[] = [
     slotLabel: 'Red-Green Slot',
     icon: '🟥 🟩',
     description: 'RED is in Front (facing your chest), GREEN is on Right. Target slot is at Front-Right.'
+  },
+  {
+    id: 'green-orange',
+    name: 'Green & Orange',
+    frontColor: 'green',
+    rightColor: 'orange',
+    frontHex: '#16a34a',
+    rightHex: '#ea580c',
+    frontLabel: 'GREEN',
+    rightLabel: 'ORANGE',
+    slotLabel: 'Green-Orange Slot',
+    icon: '🟩 🟧',
+    description: 'GREEN is in Front (facing your chest), ORANGE is on Right. Target slot is at Front-Right.'
   }
 ];
 
